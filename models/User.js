@@ -7,8 +7,8 @@ const userSchema = new Schema(
         thoughts: [{type: Schema.Types.thoughtID, ref: 'thought'}],
         friends: [{type: Schema.Types.userID, ref: 'user'}]
     },
-    {
-        toJason: {
+    {  
+        toJSON: {
         virtuals: true,
     },
     id: false,
