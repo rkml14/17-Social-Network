@@ -13,7 +13,7 @@ module.exports = {
         User.findOne({ _id: req.params.usernameId })
             .then((username) =>
                 !username
-                    ? res.status(404).json({ 'No username with that id'})
+                    ? res.status(404).json({ message: 'No username with that id' } )
                     : res.json(username)
             )
             .catch((err) => res.status(500).json(err));
@@ -58,24 +58,19 @@ module.exports = {
     },
 
     //TODO POST a new friend to user's friend list
-    newFriend(req, res) {
+    // newFriend(req, res) {
 
-},
+    // },
 
-//TODO DELETE friend from user's friend list
-deleteFriend(req, res) {
+    //TODO DELETE friend from user's friend list
+    // deleteFriend(req, res) {
 
-},
+    // },
 };
 
 
 
 
-
-
-
-
-}
 
 
 
