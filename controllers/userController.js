@@ -8,7 +8,8 @@ module.exports = {
             .then((username) => res.json(username))
             .catch((err) => res.status(500).json(err))
     },
-    //GET single user by its _id  TODO NEED TO POPULATE THOUGHT AND FRIEND DATA 
+    
+    // GET single user by its _id  TODO NEED TO POPULATE THOUGHT AND FRIEND DATA 
     getSingleUser(req, res) {
         User.findOne({ _id: req.params.usernameId })
         .select('-__v')
@@ -21,13 +22,15 @@ module.exports = {
             )
             .catch((err) => res.status(500).json(err));
     },
-    //POST a new user
+
+    // POST a new user
     createUser(req, res) {
         User.create(req.body)
             .then((dbUserData) => res.json(dbUserData))
             .catch((err) => res.status(500).json(err));
     },
-    //UPDATE a new user
+
+    // UPDATE a new user
     updateUser(req, res) {
         User.create(req.body)
             .then((username) => {
@@ -47,7 +50,7 @@ module.exports = {
                 res.status(500).json(err);
             });
     },
-    //DELETE a user by its _id BONUS: removed a user's associated thoughts when deleted
+    // DELETE a user by its _id BONUS: removed a user's associated thoughts when deleted
     deleteUser(req, res) {
         User.findOneAndDelete({ _id: req.params.usernameId })
             .then((username) =>
@@ -59,12 +62,12 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
-    //TODO POST a new friend to user's friend list
+    // TODO POST a new friend to user's friend list
     // newFriend(req, res) {
 
     // },
 
-    //TODO DELETE friend from user's friend list
+    // TODO DELETE friend from user's friend list
     // deleteFriend(req, res) {
 
     // },
