@@ -20,7 +20,7 @@ module.exports = {
     },
 
     // POST a new thought
-    createThought(req, res) {
+    createSingleThought(req, res) {
         Thought.create(req.body)
             .then((thought) => {
                 //push the created thought's _id to the associated user's thoughts array
@@ -43,7 +43,7 @@ module.exports = {
 
     // updateSingleThought
 
-    updateThought(req,res){
+    updateSingleThought(req,res){
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId},
             { $set: req.body },
