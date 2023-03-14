@@ -10,7 +10,7 @@ const {
   // deleteFriend
 } = require('../../controllers/userController');
 
-// /api/users
+// /api/user
 router.route('/').get(getAllUsers).post(createUser);
 
 // /api/users/:userId

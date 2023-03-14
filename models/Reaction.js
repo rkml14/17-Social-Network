@@ -11,6 +11,7 @@ const reactionSchema = new Schema(
         createdAt: [{ type: Date, default: Date.now, getters: true }]
     },
 );
-const Reaction = model('reaction', reactionSchema);
+//may not need line 15 
+// const Reaction = model('reaction', reactionSchema);
 
 module.exports = reactionSchema;
