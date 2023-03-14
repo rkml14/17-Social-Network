@@ -9,10 +9,9 @@ module.exports = {
             .catch((err) => res.status(500).json(err))
     },
 
-    // GET single user by its _id  TODO NEED TO POPULATE THOUGHT AND FRIEND DATA 
+    // GET single user by its _id, populated with thought & friend data 
     getSingleUser(req, res) {
         User.findOne({ _id: req.params.userId })
-            // .select('-__v')
             .populate('thoughts')
             .populate('friends')
             .then((user) =>
@@ -62,7 +61,7 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
-    // TODO POST a new friend to user's friend list
+    // POST a new friend to user's friend list
     newFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
@@ -77,9 +76,19 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
-    // TODO DELETE friend from user's friend list
+    // DELETE friend from user's friend list
     deleteFriend(req, res) {
-
+        User.findOneAndDelete(
+            { _id: req.params.userId},
+            { $pull: { friends: req.params.friendId }},
+            { new: true}
+        )
+        .then((user) =>
+        !user
+            ? res.status(404).json({ message: 'No user found with that ID' })
+            : res.json({ message: 'Friend deleted' })
+    )
+    .catch((err) => res.status(500).json(err));
     },
 };
 
