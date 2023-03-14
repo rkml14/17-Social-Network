@@ -5,20 +5,20 @@ module.exports = {
     //GET all users
     getAllUsers(req, res) {
         User.find()
-            .then((username) => res.json(username))
+            .then((user) => res.json(user))
             .catch((err) => res.status(500).json(err))
     },
-    
+
     // GET single user by its _id  TODO NEED TO POPULATE THOUGHT AND FRIEND DATA 
     getSingleUser(req, res) {
-        User.findOne({ _id: req.params.usernameId })
-        .select('-__v')
-        .populate('thoughts')
-        .populate('friends')
-            .then((username) =>
-                !username
-                    ? res.status(404).json({ message: 'No username with that id' })
-                    : res.json(username)
+        User.findOne({ _id: req.params.userId })
+            // .select('-__v')
+            .populate('thoughts')
+            .populate('friends')
+            .then((user) =>
+                !user
+                    ? res.status(404).json({ message: 'No user with that id' })
+                    : res.json(user)
             )
             .catch((err) => res.status(500).json(err));
     },
@@ -27,23 +27,23 @@ module.exports = {
     createUser(req, res) {
         User.create(req.body)
             .then((dbUserData) => res.json(dbUserData))
-            .catch((err) => res.status(500).json(err));
+            .catch((err) => {
+                res.status(500).json(err)
+            });
+
     },
 
     // UPDATE a new user
     updateUser(req, res) {
-        User.create(req.body)
-            .then((username) => {
-                return User.findOneAndUpdate(
-                    { _id: req.body.user._id },
-                    { $addToSet: { users: username._id } },
-                    { new: true }
-                );
-            })
-            .then((username) =>
-                !username
-                    ? res.status(404).json({ message: 'Username not created' })
-                    : res.json({ message: 'Username created 🎉' })
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $set: req.body },
+            { new: true }
+        )
+            .then((user) =>
+                !user
+                    ? res.status(404).json({ message: 'No user with that ID' })
+                    : res.json({ message: 'User updated! 🎉' })
             )
             .catch((err) => {
                 console.error(err);
@@ -52,25 +52,35 @@ module.exports = {
     },
     // DELETE a user by its _id BONUS: removed a user's associated thoughts when deleted
     deleteUser(req, res) {
-        User.findOneAndDelete({ _id: req.params.usernameId })
-            .then((username) =>
-                !username
-                    ? res.status(404).json({ mesage: 'No username with that ID' })
-                    : Thought.deleteMany({ _id: { $in: username.thoughts } })
+        User.findOneAndDelete({ _id: req.params.userId })
+            .then((user) =>
+                !user
+                    ? res.status(404).json({ mesage: 'No user with that ID' })
+                    : Thought.deleteMany({ _id: { $in: user.thoughts } })
             )
-            .then(() => res.json({ message: 'Username and associated thoughts deleted!' }))
+            .then(() => res.json({ message: 'user and associated thoughts deleted!' }))
             .catch((err) => res.status(500).json(err));
     },
 
     // TODO POST a new friend to user's friend list
-    // newFriend(req, res) {
-
-    // },
+    newFriend(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $addToSet: { friends: req.params.friendId } },
+            { new: true }
+            )
+            .then((user) =>
+                !user
+                    ? res.status(404).json({ message: 'No user found with that ID' })
+                    : res.json(user)
+            )
+            .catch((err) => res.status(500).json(err));
+    },
 
     // TODO DELETE friend from user's friend list
-    // deleteFriend(req, res) {
+    deleteFriend(req, res) {
 
-    // },
+    },
 };
 
 
