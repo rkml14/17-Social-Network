@@ -8,7 +8,7 @@ module.exports = {
             .catch((err) => res.status(500).json(err))
     },
 
-    //GET single thought by its _id
+    // GET single thought by its _id
     getSingleThought(req, res) {
         Thought.findOne({ _id: req.params.thoughtId })
             .then((thoughtId) =>
@@ -21,7 +21,7 @@ module.exports = {
 
 
 
-    //POST a new thought
+    // POST a new thought
     createThought(req, res) {
         Thought.create(req.body)
             .then((thought) => {
@@ -32,6 +32,8 @@ module.exports = {
                     { new: true }
                 )
             })
+
+
         // .then((user) =>
         //     !user
         //         ? res.status(404).json({
@@ -42,12 +44,14 @@ module.exports = {
         // .catch((err) => {
         //     console.log(err)
         //     res.status(500).json(err)
+
+
     },
            
 
 
 
-// updateSingleThought,
+// updateSingleThought
 
 deleteSingleThought(req, res) {
     Thought.findOneAndRemove({ _id: req.params.thoughtId })
