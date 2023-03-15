@@ -25,8 +25,8 @@ module.exports = {
             .then((thought) => {
                 //push the created thought's _id to the associated user's thoughts array
                 return User.findOneAndUpdate(
-                    { users: req.params.userId },
-                    { $push: { thoughtId: req.body.users } },
+                    { _id: req.body.userId },
+                    { $push: { thoughts: thought._id } },
                     { new: true }
                 )
                     .then((user) =>

@@ -7,7 +7,7 @@ This is an application to create the API for a new social network web applicatio
 Things I learned from this application:
 - Relation between Express.js, NoSQL and MongoDB 
 - MongoDB ODM
-- The seperation of routes & controllers 
+- The separation of routes & controllers 
 - The creation of MongoDB database & collections  
 - Creation of the new type of schema for NoSQL 
 - Gained even more understanding of how to use Insomnia to test API routes 
