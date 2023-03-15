@@ -41,7 +41,7 @@ module.exports = {
             })
     },
 
-    // updateSingleThought
+    // UPDATE a single thought
 
     updateSingleThought(req,res){
         Thought.findOneAndUpdate(
@@ -54,27 +54,27 @@ module.exports = {
       },
     
 
+// DELETE a single thought
+    deleteSingleThought(req, res) {
+        Thought.findOneAndRemove({ _id: req.params.thoughtId })
+            .then((thought) =>
+                !thought
+                    ? res.status(404).json({ message: 'no Thought with that id!' })
+                    : Thought.findOneAndUpdate(
+                        { user: req.params.thoughtId },
+                        { $pull: { user: req.params.thoughtId } },
+                        { new: true }
+                    )
+            )
+            .then((thought) =>
+                !thought ? res
+                    .status(404)
+                    .json({ message: 'Thought create but no user with that id!' })
+                    : res.json({ message: 'Thought successfully deleted!' })
+            )
+            .catch((err) => res.status(500).json(err));
+    },
 
-    // deleteSingleThought(req, res) {
-    //     Thought.findOneAndRemove({ _id: req.params.thoughtId })
-    //         .then((thought) =>
-    //             !thought
-    //                 ? res.status(404).json({ message: 'no Thought with that id!' })
-    //                 : Thought.findOneAndUpdate(
-    //                     { user: req.params.thoughtId },
-    //                     { $pull: { user: req.params.thoughtId } },
-    //                     { new: true }
-    //                 )
-    //         )
-    //         .then((thought) =>
-    //             !thought ? res
-    //                 .status(404)
-    //                 .json({ message: 'Thought create but no user with that id!' })
-    //                 : res.json({ message: 'Thought successfully deleted!' })
-    //         )
-    //         .catch((err) => res.status(500).json(err));
-    // },
-    // };
 
 };
 
