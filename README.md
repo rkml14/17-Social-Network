@@ -37,9 +37,12 @@ Run the application via the terminal using the command prompt: npm start and use
 
 In the terminal, using the command prompt: npm start
 
-![how-to-run-the-application](./images/run-the-application.png)
+![how-to-start-the-application](./Assets/starting-the-application.png)
 
 Open Insomnia to test the various API routes:
+
+
+![Get-All-Users](./Assets/insomnia-tests.png)
 
 /api/users
 * To get all users & to create a single user
@@ -68,11 +71,17 @@ If you would like to contribute to this application, please reach out to me via 
 ## Tests 
 All tests were conducted in Insomnia 
 
+A small gif of a couple of the tests able to be performed: 
+
+![gif-walkthrough-demonstrating-a-couple-of-the-tests](./Assets/gif-walkthrough.gif)
+
 ## Credits
 
 My favourite study buddy: <a href = "https://github.com/cassiewatsonn">Cassandra Watson </a> <br>
 
 My most amazing tutor: Dominique Meeks Gombe 
+
+And a big thank you to the 11:59pm Gang for the last minute help with debugging the one controller!  <a href = "https://github.com/Connor812">Connor Savoy </a> & <a href = "https://github.com/omgthegreenranger">Steve Cardie</a>
 
 ## License
 
