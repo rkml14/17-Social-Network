@@ -33,7 +33,7 @@ Run the application via the terminal using the command prompt: npm start and use
 
 ## Usage
 
-<a href = ""> A walkthrough video is available!  </a> 
+<a href = "https://drive.google.com/file/d/12qdrqdnQznSsDF6bkCdWcbLXSaN5gOjF/view"> A walkthrough video is available!  </a> 
 
 In the terminal, using the command prompt: npm start
 
