@@ -1,5 +1,4 @@
 const { User, Thought } = require('../models');
-// const User = require('../models/User');
 
 module.exports = {
     //GET all users
@@ -16,7 +15,7 @@ module.exports = {
             .populate('friends')
             .then((user) =>
                 !user
-                    ? res.status(404).json({ message: 'No user with that id' })
+                    ? res.status(404).json({ message: 'No user found with that id' })
                     : res.json(user)
             )
             .catch((err) => res.status(500).json(err));
@@ -49,6 +48,7 @@ module.exports = {
                 res.status(500).json(err);
             });
     },
+
     // DELETE a user by its _id BONUS: removed a user's associated thoughts when deleted
     deleteUser(req, res) {
         User.findOneAndDelete({ _id: req.params.userId })

@@ -30,7 +30,4 @@ const reactionSchema = new Schema(
     }
 );
 
-//may not need line 15 
-// const Reaction = model('reaction', reactionSchema);
-
 module.exports = reactionSchema;
