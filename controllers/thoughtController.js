@@ -42,19 +42,17 @@ module.exports = {
     },
 
     // UPDATE a single thought
-
-    updateSingleThought(req,res){
+    updateSingleThought(req, res) {
         Thought.findOneAndUpdate(
-            { _id: req.params.thoughtId},
+            { _id: req.params.thoughtId },
             { $set: req.body },
             { new: true }
-            )
-        .then((dbThoughtData) => res.json('Thought successfully updated!'))
-        .catch((err) => res.status(500).json(err));
-      },
-    
+        )
+            .then((dbThoughtData) => res.json('Thought successfully updated!'))
+            .catch((err) => res.status(500).json(err));
+    },
 
-// DELETE a single thought
+    // DELETE a single thought
     deleteSingleThought(req, res) {
         Thought.findOneAndRemove({ _id: req.params.thoughtId })
             .then((thought) =>
@@ -75,6 +73,22 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
 
+    //CREATE a reaction
+    createReaction(req, res) {
+        Thought.findOneAndUpdate(
+            {_id: req.params.thoughtId},
+            {$push: {reactions: req.body}},
+            { new: true}
+        )
+        .then((thought) =>
+        !thought
+        ? res.status(404).json({message: 'No thought found with that id'})
+        : res.json({message: 'Reaction created'})
+        )
+        .catch((err) => res.status(500).json(err));
+    }
+
+    //DELETE a reaction
 
 };
 
